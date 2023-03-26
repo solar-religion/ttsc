@@ -1,8 +1,7 @@
 {
-    "name": "ttypescript-build",
-    "version": "1.4.1",
+    "name": "ttsc-build",
+    "version": "2.0.0",
     "description": "Over TypeScript tool to use custom transformers in the tsconfig.json",
-    "private": true,
     "scripts": {
         "clean": "rm -rf packages/*/dist packages/*/lib",
         "clean.all": "lerna clean --yes && rm -rf package-lock.json packages/*/package-lock.json node_modules packages/*/lib packages/*/dist",
@@ -18,9 +17,9 @@
     "author": "cevek",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cevek/ttypescript.git"
+        "url": "https://github.com/solar-religion/ttsc.git"
     },
-    "homepage": "https://github.com/cevek/ttypescript/#readme",
+    "homepage": "https://github.com/solar-religion/ttsc/#readme",
     "license": "MIT",
     "devDependencies": {
         "@types/jest": ">=23.3.11",

@@ -1,5 +1,8 @@
 # ttsc
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/solar-religion/ttsc/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/ttsc.svg)](https://www.npmjs.com/package/ttsc)
+[![Downloads](https://img.shields.io/npm/dm/ttsc.svg)](https://www.npmjs.com/package/ttsc)
 This repository was created due to a perceived lack of management of ttypescript.
 
 Also, we don't currently support ts-node and cache systems, as they weren't supported in the original, and we need time to figure out a way around that.
@@ -9,6 +12,32 @@ And it supports TS5.
 [![npm version](https://badge.fury.io/js/ttypescript.svg)](https://badge.fury.io/js/ttypescript) [![Build Status](https://travis-ci.org/cevek/ttypescript.svg?branch=master)](https://travis-ci.org/cevek/ttypescript)
 
 # ttypescript
+
+## Existing contributors
+
+-   @cevek
+-   @zerkalica
+-   @SalvatorePreviti
+-   @timocov
+-   @SlurpTheo
+-   @samchon
+-   @henriquehbr
+-   @JiangWeixian
+-   @mdmitry01
+-   @jirutka
+-   @alexgorbatchev
+-   @oscard0m
+-   @sveyret
+-   @Jack-Works
+-   @MicahZoltu
+-   @Igorbek
+-   @gfx
+-   @danielpza
+-   @mikeyhew
+-   @huafu
+-   @dsherret
+-   @SupernaviX
+-   @HitkoDev
 
 ## What it is
 
