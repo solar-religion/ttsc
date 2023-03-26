@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "declaration": true,
+        "module": "commonjs",
+        "strict": true,
+        "baseUrl": "packages",
+        "lib": ["es2015"],
+        "paths": {
+            "ttypescript/lib/*": ["ttypescript/src/*"],
+            "ttypescript": ["ttypescript/src/typescript"],
+            "ttypescript-*": ["ttypescript-*/src"]
+        }
+    }
+}

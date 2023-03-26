@@ -1,0 +1,7 @@
+.idea
+node_modules
+example
+src
+tslint.json
+tsconfig.json
+.travis.yml
