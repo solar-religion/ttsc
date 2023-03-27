@@ -14,7 +14,7 @@
         "prettier": "npx prettier --config .prettierrc.js --check .",
         "prettier:fix": "npx prettier --config .prettierrc.js --write ."
     },
-    "version": "0.0.3",
+    "version": "0.0.5",
     "description": "Over TypeScript tool to use custom transformers in the tsconfig.json",
     "main": "lib/typescript.js",
     "files": [
@@ -28,7 +28,7 @@
         "type": "git",
         "url": "https://github.com/solar-religion/ttsc.git"
     },
-    "homepage": "https://github.com/solar-religion/ttsc/tree/main/packages/ttypescript",
+    "homepage": "https://github.com/solar-religion/ttsc",
     "keywords": [
         "typescript",
         "wrapper",
