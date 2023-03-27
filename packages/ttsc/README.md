@@ -1,9 +1,46 @@
+# ttsc
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/solar-religion/ttsc/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/ttsc.svg)](https://www.npmjs.com/package/ttsc)
+[![Downloads](https://img.shields.io/npm/dm/ttsc.svg)](https://www.npmjs.com/package/ttsc)
+This repository was created due to a perceived lack of management of ttypescript.
+
+Also, we don't currently support ts-node and cache systems, as they weren't supported in the original, and we need time to figure out a way around that.
+
+And it supports TS5.
 
 [![npm version](https://badge.fury.io/js/ttypescript.svg)](https://badge.fury.io/js/ttypescript) [![Build Status](https://travis-ci.org/cevek/ttypescript.svg?branch=master)](https://travis-ci.org/cevek/ttypescript)
 
 # ttypescript
 
+## Existing contributors
+
+-   @cevek
+-   @zerkalica
+-   @SalvatorePreviti
+-   @timocov
+-   @SlurpTheo
+-   @samchon
+-   @henriquehbr
+-   @JiangWeixian
+-   @mdmitry01
+-   @jirutka
+-   @alexgorbatchev
+-   @oscard0m
+-   @sveyret
+-   @Jack-Works
+-   @MicahZoltu
+-   @Igorbek
+-   @gfx
+-   @danielpza
+-   @mikeyhew
+-   @huafu
+-   @dsherret
+-   @SupernaviX
+-   @HitkoDev
+
 ## What it is
+
 Currently TypeScript doesn't support custom transformers in the tsconfig.json, but supports it programmatically.
 
 And there is no way to compile your files using custom transformers using `tsc` command.
@@ -19,6 +56,7 @@ import * as tsServer from 'ttypescript/lib/tsserver'
 import * as watchGuard from 'ttypescript/lib/watchGuard'
 ```
 --->
+
 Instead of tsc and tsserver, use ttsc and ttsserver wrappers. This wrappers try to use locally installed typescript first.
 
 No version lock-ins - typescript used as peer dependency.
@@ -36,6 +74,7 @@ ttypescript uses your installed `typescript` in your `node_modules`
 ### tsconfig.json
 
 Set a transformer path to the `tsconfig.json` in `compilerOptions` section `plugin` array:
+
 ```
 {
     "compilerOptions": {
@@ -86,13 +125,15 @@ You just need to add the `transform` block with optional `import`, `type`, `afte
 `transform` can accept npm module or local file path (.ts or .js) related to `tsconfig.json`
 
 ### PluginConfig.type
+
 Because currently transformers can run only programmatically, most of them use factory wrapper with different signatures.
 For the possible to work with any of them you can specify `type` in the plugin config.
 
 By default will be used a `program` type.
+
 <!---
 
-Most of transformers exports ``` ts.TransformerFactory<ts.SourceFile> ```. 
+Most of transformers exports ``` ts.TransformerFactory<ts.SourceFile> ```.
 But better to export TransformerBasePlugin, described below. In most cases it's a plugin responsibility to when run a transformer.
 
 ```ts
@@ -105,41 +146,55 @@ export interface TransformerBasePlugin {
 export type TransformerPlugin = TransformerBasePlugin | ts.TransformerFactory<ts.SourceFile>;
 ```
 --->
-#### program 
-If the transformer has a factory signature using `program` as first argument: 
+
+#### program
+
+If the transformer has a factory signature using `program` as first argument:
+
 ```ts
-(program: ts.Program, config?: PluginConfig) => ts.TransformerFactory
-where 
-ts.TransformerFactory = (context: ts.TransformationContext) => (sourceFile: ts.SourceFile) => ts.SourceFile
+(program: ts.Program, config?: PluginConfig) => ts.TransformerFactory;
+where;
+ts.TransformerFactory = (context: ts.TransformationContext) => (sourceFile: ts.SourceFile) => ts.SourceFile;
 ```
+
 Plugin config entry: `{ "transform": "transformer-module" }`.
 
-
 #### config
+
 For the signature with transformer's config:
+
 ```ts
-(config: PluginConfig) => ts.TransformerFactory
+(config: PluginConfig) => ts.TransformerFactory;
 ```
+
 Plugin config entry: `{ "transform": "transformer-module", type: "config" }`.
 
 #### checker
+
 For the signature with ts.TypeChecker:
+
 ```ts
-(checker: ts.TypeChecker, config?: PluginConfig) => ts.TransformerFactory
+(checker: ts.TypeChecker, config?: PluginConfig) => ts.TransformerFactory;
 ```
+
 Plugin config entry: `{ "transform": "transformer-module", type: "checker" }`.
 
 #### raw
+
 For the signature without factory wrapper:
+
 ```ts
-ts.TransformerFactory
+ts.TransformerFactory;
 ```
+
 Plugin config entry: `{ "transform": "transformer-module", type: "raw" }`.
 
 #### compilerOptions
+
 ```ts
-(compilerOpts: ts.CompilerOptions, config?: PluginConfig) => ts.TransformerFactory
+(compilerOpts: ts.CompilerOptions, config?: PluginConfig) => ts.TransformerFactory;
 ```
+
 Plugin config entry: `{ "transform": "transformer-module", type: "compilerOptions" }`.
 
 ```json
@@ -152,13 +207,14 @@ Plugin config entry: `{ "transform": "transformer-module", type: "compilerOption
             { "transform": "transformer-module", "afterDeclarations": true },
             { "transform": "transformer-module", "type": "ls" }
         ]
-    },
+    }
 }
 ```
 
 ### Command line
 
 Like usual `tsc`, all arguments work the same way.
+
 ```
 ttsc
 ```
@@ -174,12 +230,13 @@ ts-node -C ttypescript index.ts
 ### Parcel
 
 Just install a parcel plugin
+
 ```
 npm i parcel-plugin-ttypescript
 ```
 
-
 ### Webpack
+
 ```js
     {
         test: /\.(ts|tsx)$/,
@@ -193,51 +250,57 @@ npm i parcel-plugin-ttypescript
 ```
 
 ### Rollup
+
 ```js
 // rollup.config.js
-import ttypescript from 'ttypescript'
-import tsPlugin from 'rollup-plugin-typescript2'
+import ttypescript from 'ttypescript';
+import tsPlugin from 'rollup-plugin-typescript2';
 
 export default {
     // ...
     plugins: [
         // ...
         tsPlugin({
-            typescript: ttypescript
-        })
-    ]
-}
+            typescript: ttypescript,
+        }),
+    ],
+};
 ```
 
 ### VS Code
-If you want to compile your project with VS Code task runner you need to overwrite the config `typescript.tsdk` to path of the installed `ttypescript`: 
+
+If you want to compile your project with VS Code task runner you need to overwrite the config `typescript.tsdk` to path of the installed `ttypescript`:
+
 ```
 "typescript.tsdk": "/usr/local/lib/node_modules/ttypescript/lib",
-or 
+or
 "typescript.tsdk": "node_modules/ttypescript/lib",
 ```
 
 ### Jest, ts-jest
+
 ```js
 module.exports = {
-  // [...]
-  globals: {
-    'ts-jest': {
-      compiler: 'ttypescript'
-    }
-  }
+    // [...]
+    globals: {
+        'ts-jest': {
+            compiler: 'ttypescript',
+        },
+    },
 };
 ```
+
 or in `package.json`
+
 ```json
 {
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "compiler": "ttypescript"
-      }
+    "jest": {
+        "globals": {
+            "ts-jest": {
+                "compiler": "ttypescript"
+            }
+        }
     }
-  }
 }
 ```
 
@@ -248,7 +311,7 @@ You can use transformers written in ts or js
 ```ts
 // transformer1-module
 import * as ts from 'typescript';
-export default function(program: ts.Program, pluginOptions: {}) {
+export default function (program: ts.Program, pluginOptions: {}) {
     return (ctx: ts.TransformationContext) => {
         return (sourceFile: ts.SourceFile) => {
             function visitor(node: ts.Node): ts.Node {
@@ -261,47 +324,72 @@ export default function(program: ts.Program, pluginOptions: {}) {
         };
     };
 }
-
 ```
 
-Examples of transformers
+Examples of transformers:
 
-[`{ "transform": "ts-optchain/transform" }`](https://github.com/rimeto/ts-optchain) 
+[`{ "transform": "ts-nameof", type: "raw"}`](https://github.com/dsherret/ts-nameof)
 
-[`{transform: "typescript-is/lib/transform-inline/transformer"}`](https://github.com/woutervh-/typescript-is) 
+[`{ "transform": "ts-optchain/transform" }`](https://github.com/rimeto/ts-optchain)
 
-[`{transform: "ts-transformer-keys/transformer"}`](https://github.com/kimamula/ts-transformer-keys) 
+[`{ "transform": "ts-transform-asset" }`](https://github.com/slune-org/ts-transform-asset)
 
-[`{transform: "ts-transformer-enumerate/transformer"}`](https://github.com/kimamula/ts-transformer-enumerate)
+[`{ "transform": "ts-transform-auto-require" }`](https://github.com/slune-org/ts-transform-auto-require)
 
-[`{transform: "ts-transform-graphql-tag/dist/transformer"}`](https://github.com/firede/ts-transform-graphql-tag) 
+[`{ "transform": "ts-transform-css-modules/dist/transform", type: "config" }`](https://github.com/longlho/ts-transform-css-modules)
 
-[`{transform: "ts-transform-img/dist/transform", type: "config"}`](https://github.com/longlho/ts-transform-img) 
+[`{ "transform": "ts-transform-graphql-tag/dist/transformer" }`](https://github.com/firede/ts-transform-graphql-tag)
 
-[`{transform: "ts-transform-css-modules/dist/transform", type: "config"}`](https://github.com/longlho/ts-transform-css-modules) 
+[`{ "transform": "ts-transform-img/dist/transform", type: "config" }`](https://github.com/longlho/ts-transform-img)
 
-[`{transform: "ts-transform-react-intl/dist/transform", import: "transform", type: "config"}`](https://github.com/longlho/ts-transform-react-intl) 
+[`{ "transform": "ts-transform-react-intl/dist/transform", import: "transform", type: "config" }`](https://github.com/longlho/ts-transform-react-intl)
 
-[`{transform: "ts-nameof", type: "raw"}`](https://github.com/dsherret/ts-nameof) 
+[`{ "transform": "ts-transformer-enumerate/transformer" }`](https://github.com/kimamula/ts-transformer-enumerate)
 
-[`{transform: "typescript-transform-jsx" }`](https://github.com/LeDDGroup/typescript-transform-jsx) 
+[`{ "transform": "ts-transformer-keys/transformer" }`](https://github.com/kimamula/ts-transformer-keys)
 
-[`{transform: "typescript-transform-paths" }`](https://github.com/LeDDGroup/typescript-transform-paths) 
+[`{ "transform": "ts-transformer-minify-privates" }`](https://github.com/timocov/ts-transformer-minify-privates)
 
-[`{transform: "typescript-transform-macros" }`](https://github.com/LeDDGroup/typescript-transform-macros) 
+[`{ "transform": "typescript-is/lib/transform-inline/transformer" }`](https://github.com/woutervh-/typescript-is)
 
-[`{transform: "ts-transformer-minify-privates" }`](https://github.com/timocov/ts-transformer-minify-privates) 
+[`{ "transform": "typescript-plugin-styled-components", type: "config" }`](https://github.com/Igorbek/typescript-plugin-styled-components#ttypescript-compiler)
 
-[`{transform: "typescript-plugin-styled-components", type: "config"}`](https://github.com/Igorbek/typescript-plugin-styled-components#ttypescript-compiler)
+[`{ "transform": "typescript-transform-jsx" }`](https://github.com/LeDDGroup/typescript-transform-jsx)
+
+[`{ "transform": "typescript-transform-macros" }`](https://github.com/LeDDGroup/typescript-transform-macros)
+
+[`{ "transform": "typescript-transform-paths" }`](https://github.com/LeDDGroup/typescript-transform-paths)
+
+[`{ "transform": "@zerollup/ts-transform-paths" }`](https://github.com/zerkalica/zerollup/tree/master/packages/ts-transform-paths)
 
 [`{ "transform": "@zoltu/typescript-transformer-append-js-extension" }`](https://github.com/Zoltu/typescript-transformer-append-js-extension)
 
+[`{ "transform": "@magic-works/ttypescript-browser-like-import-transformer" }`](https://github.com/Jack-Works/ttypescript-browser-like-import-transformer)
+
+[`{ "transform": "typescript-transform-react-jsx-source" }`](https://github.com/alexgorbatchev/typescript-transform-react-jsx-source)
+
+[`{ "transform": "ts-transformer-remove-named-export" }`](https://github.com/dominguezcelada/ts-transformer-remove-named-export)
+
+[`{ "transform": "ts-transformer-export-default-name" }`](https://github.com/jirutka/ts-transformer-export-default-name)
+
+[`{ "transform": "ts-transformer-inline-file/transformer" }`](https://github.com/jirutka/ts-transformer-inline-file)
+
+[`{ "transform": "ts-transformer-strip-const-enums", "entrySourceFiles": ["./src/index.ts" }`](https://github.com/timocov/ts-transformer-strip-const-enums)
+
+[`{ "transform": "ts-transformer-properties-rename", "entrySourceFiles": ["./src/index.ts"] }`](https://github.com/timocov/ts-transformer-properties-rename)
+
+[`{ "transform": "tsc-progress", "name": "TSC", "color": "green" }`](https://github.com/JiangWeixian/tsc-progress)
 
 [Tutorial how to write a typescript transformer](https://dev.doctorevidence.com/how-to-write-a-typescript-transform-plugin-fc5308fdd943)
 
+-   [Tutorial how to write a typescript transformer](https://dev.doctorevidence.com/how-to-write-a-typescript-transform-plugin-fc5308fdd943)
+-   [Transformer framework](https://github.com/slune-org/simple-ts-transform)
+-   [Unit testing transformer compiler](https://github.com/slune-org/ts-transform-test-compiler)
 
 ## Example
+
 An example project is in the [example](./packages/ttypescript-examples) directory
 
 ## License
+
 MIT License
