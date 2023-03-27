@@ -5,4 +5,3 @@ lib
 dist
 *.log
 .DS_STORE
-.vscode
