@@ -1,12 +1,16 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as ts from 'ttypescript';
-const exampleDir = path.resolve(__dirname, '..', '..', 'ttypescript-examples', 'src');
+import * as ts from 'ttsc';
+const exampleTestFile = `const a = { b: 1 };
+declare function safely(a: any): void;
 
+function abc() {
+    const c = safely(a.b);
+}
+console.log(abc.toString());`;
 describe('typescript', () => {
     it('should apply transformer from legacy config', () => {
-        const content = fs.readFileSync(path.join(exampleDir, 'test.ts')).toString();
-        const res = ts.transpileModule(content, {
+        const res = ts.transpileModule(exampleTestFile, {
             compilerOptions: {
                 plugins: [
                     {
@@ -29,9 +33,7 @@ console.log(abc.toString());
     });
 
     it('should apply transformer from default config', () => {
-        const content = fs.readFileSync(path.join(exampleDir, 'test.ts')).toString();
-
-        const res = ts.transpileModule(content, {
+        const res = ts.transpileModule(exampleTestFile, {
             compilerOptions: {
                 plugins: [
                     {
@@ -52,10 +54,9 @@ console.log(abc.toString());
     });
 
     it('should merge transformers', () => {
-        const content = fs.readFileSync(path.join(exampleDir, 'test.ts')).toString();
-        const customTransformer = jest.fn(sf => sf)
+        const customTransformer = jest.fn((sf) => sf);
 
-        const res = ts.transpileModule(content, {
+        const res = ts.transpileModule(exampleTestFile, {
             compilerOptions: {
                 plugins: [
                     {
@@ -64,7 +65,7 @@ console.log(abc.toString());
                 ] as any,
             },
             transformers: {
-                before: [() => customTransformer]
+                before: [() => customTransformer],
             },
         });
 
@@ -76,7 +77,7 @@ console.log(abc.toString());
 `;
 
         expect(res.outputText).toEqual(result);
-        expect(customTransformer).toHaveBeenCalled()
+        expect(customTransformer).toHaveBeenCalled();
     });
 
     it('should run 3rd party transformers', () => {
@@ -88,7 +89,7 @@ console.log(abc.toString());
                     // { transform: 'ts-transform-graphql-tag/dist/transformer' },
                     { transform: 'ts-transform-img/dist/transform', type: 'config' },
                     { transform: 'ts-transform-css-modules/dist/transform', type: 'config' },
-                    { transform: 'ts-transform-react-intl/dist/transform', type: 'config', import: "transform" },
+                    { transform: 'ts-transform-react-intl/dist/transform', type: 'config', import: 'transform' },
                     { transform: 'ts-nameof', type: 'raw' },
                 ] as any,
             },

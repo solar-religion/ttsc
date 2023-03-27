@@ -1,5 +1,12 @@
 {
-    "extends": "./tsconfig.base.json",
-    "include": ["packages/**/*.ts"],
-    "exclude": ["packages/*/__tests__/**"]
+    "compilerOptions": {
+        "target": "es5",
+        "declaration": true,
+        "module": "commonjs",
+        "strict": true,
+        "lib": ["es2015"],
+        "outDir": "lib",
+        "rootDir": "src"
+    },
+    "exclude": ["__tests__", "lib"]
 }

@@ -1,11 +1,9 @@
-import resolve = require('resolve');
-import path = require('path');
-import vm = require('vm');
-
-import { loadTypeScript } from 'ttypescript/lib/loadTypescript';
+import * as resolve from 'resolve';
+import * as path from 'path';
+import * as vm from 'vm';
+import { loadTypeScript } from 'ttsc/lib/loadTypescript';
 
 describe('loadTypeScript', () => {
-
     const originalResolveSync = resolve.sync;
 
     beforeEach(() => {

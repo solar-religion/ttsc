@@ -1,26 +1,46 @@
 {
-    "name": "ttsc-build",
-    "version": "2.0.0",
-    "description": "Over TypeScript tool to use custom transformers in the tsconfig.json",
+    "name": "ttsc",
+    "bin": {
+        "ttsc": "./bin/tsc",
+        "ttsserver": "./bin/tsserver"
+    },
     "scripts": {
+        "build": "tsc",
         "clean": "rm -rf packages/*/dist packages/*/lib",
         "clean.all": "lerna clean --yes && rm -rf package-lock.json packages/*/package-lock.json node_modules packages/*/lib packages/*/dist",
         "debug": "node --inspect-brk ./node_modules/jest/bin/jest --runInBand --no-cache --no-watchman",
-        "postinstall": "lerna bootstrap --hoist",
-        "build": "lerna exec --scope=ttsc -- tsc",
         "test": "npm run build && jest",
         "test.watch": "npm run build && jest --watch",
-        "publish": "npm test && lerna publish --conventional-commits --yes",
         "prettier": "npx prettier --config .prettierrc.js --check .",
         "prettier:fix": "npx prettier --config .prettierrc.js --write ."
     },
-    "author": "cevek",
+    "version": "0.0.1",
+    "description": "Over TypeScript tool to use custom transformers in the tsconfig.json",
+    "main": "lib/typescript.js",
+    "files": [
+        "*.md",
+        "bin",
+        "lib",
+        "ts-node-config"
+    ],
+    "author": "sunrabbit123",
     "repository": {
         "type": "git",
         "url": "https://github.com/solar-religion/ttsc.git"
     },
-    "homepage": "https://github.com/solar-religion/ttsc/#readme",
+    "homepage": "https://github.com/solar-religion/ttsc/tree/main/packages/ttypescript",
+    "keywords": [
+        "typescript",
+        "wrapper",
+        "transform",
+        "transformer",
+        "plugin",
+        "config"
+    ],
     "license": "MIT",
+    "dependencies": {
+        "resolve": ">=1.9.0"
+    },
     "devDependencies": {
         "@types/jest": ">=23.3.11",
         "@types/node": ">=10.12.18",
@@ -35,6 +55,11 @@
         "ts-transform-react-intl": ">=0.4.0",
         "ts-transformer-enumerate": ">=0.3.1",
         "ts-transformer-keys": ">=0.3.4",
+        "ttsc": "file:.",
+        "typescript": ">=3.2.2"
+    },
+    "peerDependencies": {
+        "ts-node": ">=8.0.2",
         "typescript": ">=3.2.2"
     }
 }
