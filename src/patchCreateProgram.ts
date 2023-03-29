@@ -201,12 +201,9 @@ function injectionShadowedValues(target: any) {
                       .replace(/Debug\./g, 'target.')
                       .replace(/target\.target\./g, 'target.');
         const { transpileModule: __, ..._target } = target;
-        console.log(originTranspileModule);
         (_target as typeof ts).transpileModule = eval('(' + originTranspileModule + ')');
         return _target;
     } catch (e) {
-        console.log(e);
-
         return target;
     }
 }
