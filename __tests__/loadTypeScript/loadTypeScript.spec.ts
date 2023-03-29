@@ -1,7 +1,7 @@
 import * as resolve from 'resolve';
 import * as path from 'path';
 import * as vm from 'vm';
-import { loadTypeScript } from 'ttsc/lib/loadTypescript';
+import { loadTypeScript } from '../../lib/loadTypescript';
 
 describe('loadTypeScript', () => {
     const originalResolveSync = resolve.sync;

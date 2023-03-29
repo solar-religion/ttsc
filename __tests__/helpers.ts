@@ -1,4 +1,4 @@
-import { PluginConfig, PluginCreator } from 'ttsc/lib/PluginCreator';
+import { PluginConfig, PluginCreator } from '../lib/PluginCreator';
 import * as ts from 'typescript';
 
 export function createTransformers(config: PluginConfig[]): ts.CustomTransformers {

@@ -1,4 +1,4 @@
-import * as ts from 'ttsc';
+import * as ts from '../lib/typescript';
 
 describe('tsplugins', () => {
     it('should skip ts plugin without errors', () => {

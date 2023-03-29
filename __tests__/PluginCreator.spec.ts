@@ -1,4 +1,4 @@
-import { PluginConfig, PluginCreator } from 'ttsc/lib/PluginCreator';
+import { PluginConfig, PluginCreator } from '../lib/PluginCreator';
 import { createTransformers } from './helpers';
 import { advancedTransformer } from './transforms/transform-advanced';
 import { simpleTransformer } from './transforms/transform-simple';

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as ts from 'ttsc';
+import * as ts from '../lib/typescript';
 const exampleTestFile = `const a = { b: 1 };
 declare function safely(a: any): void;
 
