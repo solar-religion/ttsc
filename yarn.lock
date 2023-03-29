@@ -5993,7 +5993,7 @@ tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0:
   integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
 
 "ttsc@file:.":
-  version "0.0.1"
+  version "0.2.0"
   dependencies:
     resolve ">=1.9.0"
 
