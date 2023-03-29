@@ -30,7 +30,7 @@ export function loadTypeScript(
         (result as any).args.this = (result as any).args.exports;
     }
 
-    return result;
+    return result as any;
 }
 
 type TypeScriptFactory = (exports: ts, require: NodeRequire, module: Module, filename: string, dirname: string) => void;

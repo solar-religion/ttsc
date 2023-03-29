@@ -2,6 +2,7 @@ import { dirname } from 'path';
 import * as ts from 'typescript';
 import { PluginConfig, PluginCreator } from './PluginCreator';
 import { Diagnostic } from 'typescript/lib/tsserverlibrary';
+const [major, minor]: [number, number] = ts.version.split('.').map((str: string) => Number(str)) as [number, number];
 
 declare module 'typescript' {
     interface CreateProgramOptions {
@@ -109,7 +110,6 @@ export function patchCreateProgram(tsm: typeof ts, forceReadConfig = false, proj
         return program;
     }
     (rest1 as typeof ts).createProgram = hackCreateProgram;
-
     return injectionShadowedValues(rest1) as typeof ts;
 }
 
@@ -186,16 +186,27 @@ function injectionShadowedValues(target: any) {
         return path.length > extension.length && path.endsWith(extension);
     }
     try {
-        let originTranspileModule = (target.transpileModule as any)
-            .toString()
-            .replace(/(?<!function)\s([a-z][A-Za-z0-9]+)\(/g, ' target.$1(')
-            .replace('hasProperty', 'target.hasProperty')
-            .replace(/Debug\./g, 'target.')
-            .replace('transpileOptionValueCompilerOptions', 'target.transpileOptionValueCompilerOptions');
+        let originTranspileModule =
+            major >= 5
+                ? (target.transpileModule as any)
+                      .toString()
+                      .replace(/(?<!function)\s([a-z][A-Za-z0-9]+)\(/g, ' target.$1(')
+                      .replace('hasProperty', 'target.hasProperty')
+                      .replace(/Debug\./g, 'target.')
+                      .replace('transpileOptionValueCompilerOptions', 'target.transpileOptionValueCompilerOptions')
+                : (target.transpileModule as any)
+                      .toString()
+                      .replace(/(?<!function)\s([a-z][A-Za-z0-9]+)\(/g, ' target.$1(')
+                      .replace(/ts\./g, 'target.')
+                      .replace(/Debug\./g, 'target.')
+                      .replace(/target\.target\./g, 'target.');
         const { transpileModule: __, ..._target } = target;
+        console.log(originTranspileModule);
         (_target as typeof ts).transpileModule = eval('(' + originTranspileModule + ')');
         return _target;
     } catch (e) {
+        console.log(e);
+
         return target;
     }
 }
