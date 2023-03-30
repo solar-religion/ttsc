@@ -11,7 +11,7 @@ const [major, minor]: [number, number] = ts.version.split('.').map((str: string)
 let commandLineTsCode = fs
     .readFileSync(tscFileName, 'utf8')
     .replace(
-        major >= 4 && minor >= 9
+        major == 4 && minor >= 9
             ? /^[\s\S]+(\(function \(ts\) {\s+var StatisticType;[\s\S]+)$/
             : /^[\s\S]+(\(function \(ts\) {\s+function countLines[\s\S]+)$/,
         '$1'
