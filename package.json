@@ -14,7 +14,7 @@
         "prettier": "npx prettier --config .prettierrc.js --check .",
         "prettier:fix": "npx prettier --config .prettierrc.js --write ."
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Over TypeScript tool to use custom transformers in the tsconfig.json",
     "main": "lib/typescript.js",
     "files": [
