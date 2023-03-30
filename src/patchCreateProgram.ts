@@ -32,7 +32,6 @@ export function addDiagnosticFactory(program: ts.Program) {
 
 export function patchCreateProgram(tsm: typeof ts, forceReadConfig = false, projectDir = process.cwd()) {
     const originCreateProgram = tsm.createProgram;
-    const { createProgram: _, ...rest1 } = tsm;
     function hackCreateProgram(createProgramOptions: ts.CreateProgramOptions): ts.Program;
     function hackCreateProgram(
         rootNames: ReadonlyArray<string>,
@@ -109,8 +108,14 @@ export function patchCreateProgram(tsm: typeof ts, forceReadConfig = false, proj
         };
         return program;
     }
-    (rest1 as typeof ts).createProgram = hackCreateProgram;
-    return injectionShadowedValues(rest1) as typeof ts;
+    if( major < 5){
+        tsm.createProgram = hackCreateProgram;
+        return tsm;
+    }else{
+        const { createProgram: _, ...rest1 } = tsm;
+        (rest1 as typeof ts).createProgram = hackCreateProgram;
+        return injectionShadowedValues(rest1) as typeof ts;
+    }
 }
 
 function getConfig(
