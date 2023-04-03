@@ -158,7 +158,8 @@ export type TransformerPlugin = TransformerBasePlugin | ts.TransformerFactory<ts
 If the transformer has a factory signature using `program` as first argument:
 
 ```ts
-(program: ts.Program, config?: PluginConfig) => ts.TransformerFactory;
+(program: ts.Program, config: PluginConfig, helpers: { ts: typeof ts; addDiagnostic: (diag: ts.Diagnostic) => void }) =>
+    ts.TransformerFactory;
 where;
 ts.TransformerFactory = (context: ts.TransformationContext) => (sourceFile: ts.SourceFile) => ts.SourceFile;
 ```
