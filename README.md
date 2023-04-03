@@ -10,6 +10,11 @@ Also, we don't currently support `ts-node` and `cache systems`, as they weren't 
 
 And it supports TS5.
 
+This is a modification to the typescript runtime code, so the
+typescript versioning.
+
+I personally recommend ts-patch.
+
 [![npm version](https://badge.fury.io/js/ttypescript.svg)](https://badge.fury.io/js/ttypescript) [![Build Status](https://travis-ci.org/cevek/ttypescript.svg?branch=master)](https://travis-ci.org/cevek/ttypescript)
 
 # ttypescript
