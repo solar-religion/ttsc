@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/ttsc.svg)](https://www.npmjs.com/package/ttsc)
 [![Downloads](https://img.shields.io/npm/dm/ttsc.svg)](https://www.npmjs.com/package/ttsc)
 
-This repository was created due to a perceived lack of management of `ttypescript`.
+This repository waasdfasdfsdafs created due to a perceived lack of management of `ttypescript`.
 
 Also, we don't currently support `ts-node` and `cache systems`, as they weren't supported in the original, and we need time to figure out a way around that.
 
