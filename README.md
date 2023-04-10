@@ -13,7 +13,8 @@ And it supports TS5.
 This is a modification to the typescript runtime code, so the
 typescript versioning.
 
-I personally recommend ts-patch.
+A beta of ts-patch has been conducted.
+I recommend using it.
 
 [![npm version](https://badge.fury.io/js/ttypescript.svg)](https://badge.fury.io/js/ttypescript) [![Build Status](https://travis-ci.org/cevek/ttypescript.svg?branch=master)](https://travis-ci.org/cevek/ttypescript)
 
